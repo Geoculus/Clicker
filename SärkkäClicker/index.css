@@ -21,6 +21,19 @@ body {
     height: 30px;
 }
 
+#music-volume-slider {
+    accent-color: #c706c7;
+    position: absolute;
+    left: 20%;
+    top: 12%;
+}
+#sound-volume-slider {
+    accent-color: #c706c7;
+    position: absolute;
+    left: 20%;
+    top: 16%;
+}
+
 #music-toggle-button img {
     width: 40px;
     height: 30px;
@@ -228,6 +241,7 @@ body {
 #hattara {
     position: absolute;
     width: 10%; /* Adjust the size as needed */
+    z-index: 1000;
     height: auto;
     top: 30%; /* Adjust the position relative to possu */
     left: 10%; /* Adjust the position relative to possu */
@@ -236,6 +250,7 @@ body {
 #hattara1 {
     position: absolute;
     width: 10%; /* Adjust the size as needed */
+    z-index: 1000;
     height: auto;
     top: 40%; /* Adjust the position relative to possu */
     left: 20%; /* Adjust the position relative to possu */
@@ -244,6 +259,7 @@ body {
 #hattara2 {
     position: absolute;
     width: 10%; /* Adjust the size as needed */
+    z-index: 1000;
     height: auto;
     top: 25%; /* Adjust the position relative to possu */
     left: 85%; /* Adjust the position relative to possu */
@@ -252,6 +268,7 @@ body {
 #hattara3 {
     position: absolute;
     width: 10%; /* Adjust the size as needed */
+    z-index: 1000;
     height: auto;
     top: 15%; /* Adjust the position relative to possu */
     left: 40%; /* Adjust the position relative to possu */
@@ -260,6 +277,7 @@ body {
 #hattara4 {
     position: absolute;
     width: 10%; /* Adjust the size as needed */
+    z-index: 1000;
     height: auto;
     top: 30%; /* Adjust the position relative to possu */
     left: 45%; /* Adjust the position relative to possu */
@@ -268,6 +286,7 @@ body {
 #hattara5 {
     position: absolute;
     width: 10%; /* Adjust the size as needed */
+    z-index: 1000;
     height: auto;
     top: 44%; /* Adjust the position relative to possu */
     left: 80%; /* Adjust the position relative to possu */
@@ -276,6 +295,7 @@ body {
 #hattara6 {
     position: absolute;
     width: 10%; /* Adjust the size as needed */
+    z-index: 1000;
     height: auto;
     top: 20%; /* Adjust the position relative to possu */
     left: 80%; /* Adjust the position relative to possu */
@@ -284,6 +304,7 @@ body {
 #hattara7 {
     position: absolute;
     width: 10%; /* Adjust the size as needed */
+    z-index: 1000;
     height: auto;
     top: 30%; /* Adjust the position relative to possu */
     left: 20%; /* Adjust the position relative to possu */

@@ -15,6 +15,9 @@ const elements = {
     musicToggleButton: document.getElementById('music-toggle-button'),
     music: document.getElementById('background-music'),
     musicIcon: document.getElementById('music-toggle-icon'),
+    clickSound: document.getElementById("click-sound"),
+    noMoneySound: document.getElementById("no-money-sound"),
+    kachingSound: document.getElementById("kaching-sound"),
     hattarasArr: [
         document.getElementById("hattara"),
         document.getElementById("hattara1"),
@@ -136,9 +139,25 @@ function handlePurchase(cost, amount, upgradeType) {
         showText(elements.kachingEl);
         displayNumbers();
         saveProgress();
+        playKaching();
     } else {
         showText(elements.alertEl);
+        playNoMoneyEffect();
     }
+}
+
+//PLAY SOUNDS
+function playClickEffect() {
+    elements.clickSound.currentTime = 0;
+    elements.clickSound.play();
+}
+function playNoMoneyEffect() {
+    elements.noMoneySound.currentTime = 0;
+    elements.noMoneySound.play();
+}
+function playKaching() {
+    elements.kachingSound.currentTime = 0;
+    elements.kachingSound.play();
 }
 
 //Clicking functions:
@@ -149,13 +168,22 @@ elements.musicToggleButton.addEventListener("click", function() {
     
     if (elements.music.paused) {
         elements.music.play();
-        elements.musicIcon.src = 'images/audioEmoji.png'; // Change to the pause icon
+        elements.musicIcon.src = 'images/musicIcon.png'; // Change to the pause icon
     } else {
         elements.music.pause();
-        elements.musicIcon.src = 'images/noAudioEmoji.png'; // Change to the play icon
+        elements.musicIcon.src = 'images/noMusicIcon.png'; // Change to the play icon
     }
 
 })
+
+// POUTACLICK
+elements.possu.addEventListener("click", () => {
+    gameData.hattaraAmount += gameData.hattarasPerClick;
+    displayNumbers();
+    spawnHattaras();
+    saveProgress();
+    playClickEffect();
+});
 
 // Meter filler
 elements.fillButton.addEventListener('click', () => {
@@ -197,13 +225,7 @@ powerUps.forEach(({ element, cost, amount, type }) => {
     document.getElementById(element).addEventListener('click', () => handlePurchase(cost, amount, type));
 });
 
-// POUTACLICK
-elements.possu.addEventListener("click", () => {
-    gameData.hattaraAmount += gameData.hattarasPerClick;
-    displayNumbers();
-    spawnHattaras();
-    saveProgress();
-});
+
 
 // Increment hattaras per second every second
 setInterval(incrementHattarasPerSec, 1000);

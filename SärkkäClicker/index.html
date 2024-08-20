@@ -16,14 +16,17 @@
     <button id="tutorial-btn"> How to play</button>
     
     
+    
 
     <div id="mega-div">
         <h1 id="title">CLICK THE POSSU! :333 (feed to win)</h1>
         
         <div class="big-boxes" id="big-box1">
             <button id="music-toggle-button">
-                <img id="music-toggle-icon" src="images/audioEmoji.png" alt="Toggle music button">
+                <img id="music-toggle-icon" src="images/musicIcon.png" alt="Toggle music button">
             </button>
+            <input type="range" id="music-volume-slider" min="0" max="100" value="50">
+            <input type="range" id="sound-volume-slider" min="0" max="100" value="50">
             <div id="big-box1-text">
                 <h2>Pouta Clicker</h2>
                 
@@ -101,6 +104,15 @@
     </div> 
     <audio id="background-music" loop> 
         <source src="audio/Music.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="click-sound">
+        <source src="audio/click1.wav" type="audio/wav">
+    </audio>
+    <audio id="no-money-sound">
+        <source src="audio/notmoney.wav" type="audio/wav">
+    </audio>
+    <audio id="kaching-sound">
+        <source src="audio/kaching.wav" type="audio/wav">
     </audio>
     <script src="code.js"> </script>
 </body>
