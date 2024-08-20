@@ -12,6 +12,20 @@ body {
     height: 1000px;
 }
 
+#music-toggle-button {
+    border: none;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+}
+
+#music-toggle-button img {
+    width: 40px;
+    height: 30px;
+}
+
 #meter-container {
     width: 300px;
     height: 30px;

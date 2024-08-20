@@ -1,4 +1,4 @@
-
+//Getting all the elements from html
 const elements = {
     cookies: document.getElementById("cookies"),
     possu: document.getElementById("possu"),
@@ -12,6 +12,7 @@ const elements = {
     hattaraPerClickEl: document.getElementById("hattarasPerClick"),
     fillButton: document.getElementById('feedBtn'),
     resetButton: document.getElementById("reset-btn"),
+    musicToggleButton: document.getElementById('music-toggle-button'),
     hattarasArr: [
         document.getElementById("hattara"),
         document.getElementById("hattara1"),
