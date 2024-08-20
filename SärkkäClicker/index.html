@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pouta Clicker</title>
+    <link rel="stylesheet" href="index.css">
+    
+</head>
+<body>
+    <div class="text-bubble" id="textBubble">Click Possu to get more hattaras! You can use the hattaras to buy upgrades or feed them to the Possu!</div>
+    <h1 id="not-enough">NOT ENOUGH HATTARAS >:(</h1>
+    <h1 id="kaching">KA-CHING!</h1>
+    <h1 id="feedText">NOM! NOM! NOM!</h1>
+    <h1 id="winText">THEY EXPLODED! :o (you win)</h1>
+    <button id="tutorial-btn"> How to play</button>
+    
+    <div id="mega-div">
+        <h1 id="title">CLICK THE POSSU! :3333 (feed to win)</h1>
+        
+        <div class="big-boxes" id="big-box1">
+            <div id="big-box1-text">
+                <h2>Pouta Clicker</h2>
+                
+                <h2>Feed meter:</h2>
+                <div id="meter-container">
+                    <div id="meter"></div>
+                </div>
+                <h2>Hattaras: <span id="hattara-amount"></span></h2>
+                <h3>Hattaras per sec: <span id="hattarasPerSec"></span></h2>
+                <h3>Hattaras per click: <span id="hattarasPerClick"></span></h2>
+            </div>
+            <div id="big-box1-images">
+                <img src="images/kapteeni.png" id="possu" alt="possu">
+                <img src="images/hattara.png" id="hattara" alt="ss">
+                <img src="images/hattara.png" id="hattara1" alt="ss">
+                <img src="images/hattara.png" id="hattara2" alt="ss">
+                <img src="images/hattara.png" id="hattara3" alt="ss">
+                <img src="images/hattara.png" id="hattara4" alt="ss">
+                <img src="images/hattara.png" id="hattara5" alt="ss">
+                <img src="images/hattara.png" id="hattara6" alt="ss">
+                <img src="images/hattara.png" id="hattara7" alt="ss">
+            </div>
+            <div id="btn-div">
+                <button id="feedBtn"> FEED ALL </button>
+            </div>
+            
+        </div>
+        <div class="big-boxes" id="big-box2">
+            
+            <div class="powerups" id="click+1">
+                <h3>Hattaras per click +1</h3>
+                <h4>cost: 100</h4>
+            </div>
+            <div class="powerups" id="persec+1">
+                <h3>Hattaras per sec +1</h3>
+                <h4>cost: 110</h4>
+            </div>
+            <div class="powerups" id="persec+2">
+                <h3>Hattaras per sec +2</h3>
+                <h4>cost: 230</h4>
+            </div>
+            <div class="powerups" id="click+2">
+                <h3>Hattaras per click +2</h3>
+                <h4>cost: 220</h4>
+            </div>
+            <div class="powerups" id="persec+10">
+                <h3>Hattaras per sec +10</h3>
+                <h4>cost: 1200</h4>
+            </div>
+            <div class="powerups" id="click+10">
+                <h3>Hattaras per click +10</h3>
+                <h4>cost: 1100</h4>
+            </div>
+            <div class="powerups" id="persec+100">
+                <h3>Hattaras per sec +100</h3>
+                <h4>cost: 11 500</h4>
+            </div>
+            <div class="powerups" id="persec+300">
+                <h3>Hattaras per sec +300</h3>
+                <h4>cost: 38 000</h4>
+            </div>
+            <div class="powerups" id="click+400">
+                <h3>Hattaras per click +400</h3>
+                <h4>cost: 50 000</h4>
+            </div>
+            <div class="powerups" id="persec+1000">
+                <h3>Hattaras per sec +1000</h3>
+                <h4>cost: 110 000</h4>
+            </div>
+        </div>
+        <div>
+            
+            <button  id="reset-btn"> reset</button>
+        </div>
+    </div> 
+    <script src="code.js"> </script>
+</body>
+</html>
