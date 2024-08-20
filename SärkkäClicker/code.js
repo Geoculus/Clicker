@@ -13,11 +13,16 @@ const elements = {
     fillButton: document.getElementById('feedBtn'),
     resetButton: document.getElementById("reset-btn"),
     musicToggleButton: document.getElementById('music-toggle-button'),
+    audioToggleButton: document.getElementById("audio-toggle-button"),
     music: document.getElementById('background-music'),
     musicIcon: document.getElementById('music-toggle-icon'),
+    audioIcon: document.getElementById('audio-toggle-icon'),
     clickSound: document.getElementById("click-sound"),
     noMoneySound: document.getElementById("no-money-sound"),
     kachingSound: document.getElementById("kaching-sound"),
+    musicVolumeSlider: document.getElementById("music-volume-slider"),
+    soundVolumeSlider: document.getElementById("sound-volume-slider"),
+    
     hattarasArr: [
         document.getElementById("hattara"),
         document.getElementById("hattara1"),
@@ -161,7 +166,7 @@ function playKaching() {
 }
 
 //Clicking functions:
-
+const allSounds = [elements.clickSound,elements.kachingSound,elements.noMoneySound];
 //Backgrtound music
 elements.musicToggleButton.addEventListener("click", function() {
     
@@ -175,6 +180,26 @@ elements.musicToggleButton.addEventListener("click", function() {
     }
 
 })
+
+elements.audioToggleButton.addEventListener("click", function() {
+    
+    
+    if (elements.kachingSound.paused) {
+        elements.audioIcon.src = 'images/audioEmoji.png'; // Change to the pause icon
+        allSounds.forEach(sound => {
+            sound.pause;
+        })
+        
+    } else {
+        elements.audioIcon.src = 'images/noAudioEmoji.png'; // Change to the play icon
+        allSounds.forEach(sound => {
+            sound.pause;
+        })
+        
+    }
+
+})
+
 
 // POUTACLICK
 elements.possu.addEventListener("click", () => {
@@ -198,6 +223,26 @@ elements.fillButton.addEventListener('click', () => {
         disablePossu();
     }
 });
+
+//Sliders
+elements.musicVolumeSlider.addEventListener("input", function() {
+    let volume = elements.musicVolumeSlider.value / 100;
+    elements.music.volume = volume;
+
+});
+
+
+
+elements.soundVolumeSlider.addEventListener("input", function() {
+    let volume = elements.soundVolumeSlider.value / 100;
+    allSounds.forEach(sound => {
+        sound.volume = volume;
+    })
+
+});
+
+
+/////
 
 // Possu disabler
 function disablePossu() {

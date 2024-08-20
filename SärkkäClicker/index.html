@@ -15,9 +15,6 @@
     <h1 id="winText">THEY EXPLODED! :o (you win)</h1>
     <button id="tutorial-btn"> How to play</button>
     
-    
-    
-
     <div id="mega-div">
         <h1 id="title">CLICK THE POSSU! :333 (feed to win)</h1>
         
@@ -26,6 +23,9 @@
                 <img id="music-toggle-icon" src="images/musicIcon.png" alt="Toggle music button">
             </button>
             <input type="range" id="music-volume-slider" min="0" max="100" value="50">
+            <button id="audio-toggle-button">
+                <img id="audio-toggle-icon" src="images/audioEmoji.png" alt="Toggle music button">
+            </button>
             <input type="range" id="sound-volume-slider" min="0" max="100" value="50">
             <div id="big-box1-text">
                 <h2>Pouta Clicker</h2>
@@ -39,7 +39,7 @@
                 <h3>Hattaras per click: <span id="hattarasPerClick"></span></h2>
             </div>
             <div id="big-box1-images">
-                <img src="images/kapteeni.png" id="possu" alt="possu">
+                <img src="images/possu.png" id="possu" alt="possu">
                 <img src="images/hattara.png" id="hattara" alt="ss">
                 <img src="images/hattara.png" id="hattara1" alt="ss">
                 <img src="images/hattara.png" id="hattara2" alt="ss">
@@ -102,7 +102,7 @@
             <button  id="reset-btn"> reset</button>
         </div>
     </div> 
-    <audio id="background-music" loop> 
+    <audio id="background-music" loop autoplay> 
         <source src="audio/Music.mp3" type="audio/mpeg">
     </audio>
     <audio id="click-sound">

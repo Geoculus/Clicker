@@ -21,6 +21,20 @@ body {
     height: 30px;
 }
 
+#audio-toggle-button {
+    border: none;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+}
+
+#audio-toggle-button img {
+    width: 40px;
+    height: 30px;
+}
+
 #music-volume-slider {
     accent-color: #c706c7;
     position: absolute;
@@ -31,7 +45,7 @@ body {
     accent-color: #c706c7;
     position: absolute;
     left: 20%;
-    top: 16%;
+    top: 15.2%;
 }
 
 #music-toggle-button img {
