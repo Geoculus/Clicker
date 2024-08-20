@@ -13,6 +13,8 @@ const elements = {
     fillButton: document.getElementById('feedBtn'),
     resetButton: document.getElementById("reset-btn"),
     musicToggleButton: document.getElementById('music-toggle-button'),
+    music: document.getElementById('background-music'),
+    musicIcon: document.getElementById('music-toggle-icon'),
     hattarasArr: [
         document.getElementById("hattara"),
         document.getElementById("hattara1"),
@@ -138,6 +140,22 @@ function handlePurchase(cost, amount, upgradeType) {
         showText(elements.alertEl);
     }
 }
+
+//Clicking functions:
+
+//Backgrtound music
+elements.musicToggleButton.addEventListener("click", function() {
+    
+    
+    if (elements.music.paused) {
+        elements.music.play();
+        elements.musicIcon.src = 'images/audioEmoji.png'; // Change to the pause icon
+    } else {
+        elements.music.pause();
+        elements.musicIcon.src = 'images/noAudioEmoji.png'; // Change to the play icon
+    }
+
+})
 
 // Meter filler
 elements.fillButton.addEventListener('click', () => {
