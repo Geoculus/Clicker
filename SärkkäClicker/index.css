@@ -12,6 +12,15 @@ body {
     height: 1000px;
 }
 
+#golden-hattara {
+    display: none;
+    width: 200px;
+    height: 250px;
+    position: absolute;
+    cursor: pointer;
+    z-index: 9999;
+}
+
 #music-toggle-button {
     border: none;
     background: none;

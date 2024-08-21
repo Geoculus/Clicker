@@ -10,6 +10,7 @@ const elements = {
     hattaraAmountEl: document.getElementById("hattara-amount"),
     hattaraPerSecEl: document.getElementById("hattarasPerSec"),
     hattaraPerClickEl: document.getElementById("hattarasPerClick"),
+    goldenHattaraEl: document.getElementById("golden-hattara"),
     fillButton: document.getElementById('feedBtn'),
     resetButton: document.getElementById("reset-btn"),
     musicToggleButton: document.getElementById('music-toggle-button'),
@@ -21,6 +22,8 @@ const elements = {
     noMoneySound: document.getElementById("no-money-sound"),
     kachingSound: document.getElementById("kaching-sound"),
     yummySound: document.getElementById("yummy-sound"),
+    goldenHattaraSpawnSound: document.getElementById("golden-hattara-spawn-sound"),
+    goldenHattaraClickSound: document.getElementById("golden-hattara-click-sound"),
     musicVolumeSlider: document.getElementById("music-volume-slider"),
     soundVolumeSlider: document.getElementById("sound-volume-slider"),
     
@@ -134,16 +137,83 @@ function spawnHattaras() {
     setTimeout(() => elements.hattarasArr[randomNum].style.visibility = "hidden", 200);
 }
 
+//golden hattara
+
+function spawnGoldenHattara() {
+    const chance = Math.random();
+
+    if (chance <=0.05) {
+        const x = Math.random() * (window.innerWidth - 100);
+        const y = Math.random() * (window.innerHeight - 100);
+
+        elements.goldenHattaraEl.style.left = `${x}px`;
+        elements.goldenHattaraEl.style.top = `${y}px`;
+        elements.goldenHattaraEl.style.display = 'block';
+
+        playGoldenHattaraSpawn();
+
+        hideTimeout = setTimeout(() => {
+            elements.goldenHattaraEl.style.display = 'none';
+        }, 30000);
+    }
+}
+
+elements.goldenHattaraEl.addEventListener("click", function(){
+    if(gameData.totalHattaraAmount<5000){
+        gameData.hattaraAmount+=3500;
+        gameData.totalHattaraAmount+=3500;
+    }else {
+        gameData.hattaraAmount+=Math.floor(gameData.totalHattaraAmount*0.2);
+    }
+    
+    elements.goldenHattaraEl.style.display = 'none';
+    displayNumbers();
+    playGoldenHattaraClick();
+})
+
 function incrementHattarasPerSec() {
     gameData.hattaraAmount += gameData.hattarasPerSec;
     gameData.totalHattaraAmount += gameData.hattarasPerSec;
     displayNumbers();
 }
 
+/*
 function handlePurchase(cost, amount, upgradeType) {
+    //if is money
     if (gameData.hattaraAmount >= cost) {
         gameData.hattaraAmount -= cost;
         gameData[upgradeType] += amount;
+        showText(elements.kachingEl);
+        displayNumbers();
+        saveProgress();
+        playKaching();
+
+    } 
+    //if no money
+    else {
+        showText(elements.alertEl);
+        playNoMoneyEffect();
+    }
+}*/
+
+function handlePurchase(index) {
+    const powerUp = powerUps[index];
+
+    if (gameData.hattaraAmount >= powerUp.cost) {
+        // Deduct the cost from the player's hattaraAmount
+        gameData.hattaraAmount -= powerUp.cost;
+
+        // Apply the power-up effect
+        gameData[powerUp.type] += powerUp.amount;
+
+        // Increase the cost for the next purchase
+        powerUp.cost = Math.ceil(powerUp.cost * 1.1);
+
+        // Update the display for the power-up's new cost
+        const buttonElement = document.getElementById(powerUp.element);
+        buttonElement.innerText = `${powerUp.name} +${powerUp.amount} \n Cost: ${powerUp.cost} Hattaras`;
+
+        // Show feedback and update game data
         showText(elements.kachingEl);
         displayNumbers();
         saveProgress();
@@ -153,6 +223,9 @@ function handlePurchase(cost, amount, upgradeType) {
         playNoMoneyEffect();
     }
 }
+
+
+
 
 //PLAY SOUNDS
 function playClickEffect() {
@@ -171,9 +244,20 @@ function playYummy() {
     elements.yummySound.currentTime = 0;
     elements.yummySound.play();
 }
+function playGoldenHattaraSpawn() {
+    elements.goldenHattaraSpawnSound.currentTime = 0;
+    elements.goldenHattaraSpawnSound.play();
+}
 
+function playGoldenHattaraClick() {
+    elements.goldenHattaraClickSound.currentTime = 0;
+    elements.goldenHattaraClickSound.play();
+}
+
+//sounds array
+const allSounds = [elements.clickSound,elements.kachingSound,elements.noMoneySound, elements.yummySound, elements.goldenHattaraClickSound, elements.goldenHattaraSpawnSound];
 //Clicking functions:
-const allSounds = [elements.clickSound,elements.kachingSound,elements.noMoneySound, elements.yummySound];
+
 
 //Backgrtound music
 elements.musicToggleButton.addEventListener("click", function() {
@@ -210,7 +294,7 @@ elements.audioToggleButton.addEventListener("click", function() {
 // POUTACLICK
 elements.possu.addEventListener("click", () => {
     gameData.hattaraAmount += gameData.hattarasPerClick;
-    gameData.totalHattaraAmount += gameData.totalHattaraAmount;
+    gameData.totalHattaraAmount += gameData.hattarasPerClick;
     displayNumbers();
     spawnHattaras();
     saveProgress();
@@ -262,22 +346,28 @@ function disablePossu() {
 
 // Power-up purchases
 const powerUps = [
-    { element: 'click+1', cost: 100, amount: 1, type: 'hattarasPerClick' },
-    { element: 'click+2', cost: 220, amount: 2, type: 'hattarasPerClick' },
-    { element: 'click+10', cost: 1100, amount: 10, type: 'hattarasPerClick' },
-    { element: 'click+400', cost: 5, amount: 400, type: 'hattarasPerClick' },
-    { element: 'persec+1', cost: 110, amount: 1, type: 'hattarasPerSec' },
-    { element: 'persec+2', cost: 230, amount: 2, type: 'hattarasPerSec' },
-    { element: 'persec+10', cost: 1200, amount: 10, type: 'hattarasPerSec' },
-    { element: 'persec+100', cost: 11500, amount: 100, type: 'hattarasPerSec' },
-    { element: 'persec+300', cost: 38000, amount: 300, type: 'hattarasPerSec' },
-    { element: 'persec+1000', cost: 100000, amount: 1000, type: 'hattarasPerSec' },
+    { element: 'click+1', cost: 100, amount: 1, type: 'hattarasPerClick', name: 'Hattaras per click' },
+    { element: 'click+2', cost: 210, amount: 2, type: 'hattarasPerClick', name: 'Hattaras per click' },
+    { element: 'click+10', cost: 5500, amount: 50, type: 'hattarasPerClick', name: 'Hattaras per click' },
+    { element: 'click+400', cost: 64000, amount: 500, type: 'hattarasPerClick', name: 'Hattaras per click' },
+    { element: 'persec+1', cost: 110, amount: 1, type: 'hattarasPerSec', name: 'Hattaras per sec' },
+    { element: 'persec+2', cost: 230, amount: 2, type: 'hattarasPerSec', name: 'Hattaras per sec' },
+    { element: 'persec+10', cost: 6000, amount: 50, type: 'hattarasPerSec', name: 'Hattaras per sec' },
+    { element: 'persec+100', cost: 13000, amount: 100, type: 'hattarasPerSec', name: 'Hattaras per sec' },
+    { element: 'persec+300', cost: 70000, amount: 500, type: 'hattarasPerSec', name: 'Hattaras per sec' },
+    { element: 'persec+1000', cost: 150000, amount: 1000, type: 'hattarasPerSec', name: 'Hattaras per sec' },
 ];
 
+/*
 powerUps.forEach(({ element, cost, amount, type }) => {
     document.getElementById(element).addEventListener('click', () => handlePurchase(cost, amount, type));
-});
+});*/
+powerUps.forEach((powerUp, index) => {
+    const buttonElement = document.getElementById(powerUp.element);
+    buttonElement.innerText = `${powerUp.name} +${powerUp.amount} \n Cost: ${powerUp.cost} Hattaras`;
 
+    buttonElement.addEventListener('click', () => handlePurchase(index));
+});
 
 
 // Increment hattaras per second every second
@@ -285,6 +375,9 @@ setInterval(incrementHattarasPerSec, 1000);
 
 // Save progress periodically
 setInterval(saveProgress, 2000);
+
+//spawn golden hattara
+setInterval(spawnGoldenHattara,10000);
 
 setInterval(disablePossu, 1);
 

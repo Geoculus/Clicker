@@ -17,16 +17,17 @@
     
     <div id="mega-div">
         <h1 id="title">CLICK THE POSSU! :333 (feed to win)</h1>
+        <img id="golden-hattara" src="images/goldenHattara.png" alt="golden hattara">
         
         <div class="big-boxes" id="big-box1">
             <button id="music-toggle-button">
                 <img id="music-toggle-icon" src="images/musicIcon.png" alt="Toggle music button">
             </button>
-            <input type="range" id="music-volume-slider" min="0" max="100" value="50">
+            <input type="range" id="music-volume-slider" min="0" max="100" value="100">
             <button id="audio-toggle-button">
                 <img id="audio-toggle-icon" src="images/audioEmoji.png" alt="Toggle music button">
             </button>
-            <input type="range" id="sound-volume-slider" min="0" max="100" value="50">
+            <input type="range" id="sound-volume-slider" min="0" max="100" value="100">
             <div id="big-box1-text">
                 <h2>Pouta Clicker</h2>
                 
@@ -64,33 +65,33 @@
                 <h3>Hattaras per sec +1</h3>
                 <h4>cost: 110</h4>
             </div>
-            <div class="powerups" id="persec+2">
-                <h3>Hattaras per sec +2</h3>
-                <h4>cost: 230</h4>
-            </div>
             <div class="powerups" id="click+2">
                 <h3>Hattaras per click +2</h3>
                 <h4>cost: 220</h4>
             </div>
-            <div class="powerups" id="persec+10">
-                <h3>Hattaras per sec +10</h3>
-                <h4>cost: 1200</h4>
+            <div class="powerups" id="persec+2">
+                <h3>Hattaras per sec +2</h3>
+                <h4>cost: 230</h4>
             </div>
             <div class="powerups" id="click+10">
                 <h3>Hattaras per click +10</h3>
                 <h4>cost: 1100</h4>
             </div>
+            <div class="powerups" id="persec+10">
+                <h3>Hattaras per sec +10</h3>
+                <h4>cost: 1200</h4>
+            </div>
             <div class="powerups" id="persec+100">
                 <h3>Hattaras per sec +100</h3>
                 <h4>cost: 11 500</h4>
             </div>
-            <div class="powerups" id="persec+300">
-                <h3>Hattaras per sec +300</h3>
-                <h4>cost: 38 000</h4>
-            </div>
             <div class="powerups" id="click+400">
                 <h3>Hattaras per click +400</h3>
                 <h4>cost: 50 000</h4>
+            </div>
+            <div class="powerups" id="persec+300">
+                <h3>Hattaras per sec +300</h3>
+                <h4>cost: 38 000</h4>
             </div>
             <div class="powerups" id="persec+1000">
                 <h3>Hattaras per sec +1000</h3>
@@ -116,6 +117,12 @@
     </audio>
     <audio id="yummy-sound">
         <source src="audio/YummySound.mp3" type="audio/mp3">
+    </audio>
+    <audio id="golden-hattara-spawn-sound">
+        <source src="audio/goldenHattaraSpawn.wav" type="audio/wav">
+    </audio>
+    <audio id="golden-hattara-click-sound">
+        <source src="audio/goldenHattaraClick.wav" type="audio/wav">
     </audio>
     <script src="code.js"> </script>
 </body>
