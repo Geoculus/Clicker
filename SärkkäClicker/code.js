@@ -20,6 +20,7 @@ const elements = {
     clickSound: document.getElementById("click-sound"),
     noMoneySound: document.getElementById("no-money-sound"),
     kachingSound: document.getElementById("kaching-sound"),
+    yummySound: document.getElementById("yummy-sound"),
     musicVolumeSlider: document.getElementById("music-volume-slider"),
     soundVolumeSlider: document.getElementById("sound-volume-slider"),
     
@@ -66,6 +67,7 @@ let gameData = {
     hattarasPerSec: 0,
     hattarasPerClick: 1,
     hattaraAmount: 0,
+    totalHattaraAmount: 0,
     hattaraClickPlusAmount: 0,
 };
 
@@ -134,6 +136,7 @@ function spawnHattaras() {
 
 function incrementHattarasPerSec() {
     gameData.hattaraAmount += gameData.hattarasPerSec;
+    gameData.totalHattaraAmount += gameData.hattarasPerSec;
     displayNumbers();
 }
 
@@ -164,9 +167,14 @@ function playKaching() {
     elements.kachingSound.currentTime = 0;
     elements.kachingSound.play();
 }
+function playYummy() {
+    elements.yummySound.currentTime = 0;
+    elements.yummySound.play();
+}
 
 //Clicking functions:
-const allSounds = [elements.clickSound,elements.kachingSound,elements.noMoneySound];
+const allSounds = [elements.clickSound,elements.kachingSound,elements.noMoneySound, elements.yummySound];
+
 //Backgrtound music
 elements.musicToggleButton.addEventListener("click", function() {
     
@@ -182,28 +190,27 @@ elements.musicToggleButton.addEventListener("click", function() {
 })
 
 elements.audioToggleButton.addEventListener("click", function() {
+    const isMuted = elements.kachingSound.muted;  // Check if the sound is currently muted
     
-    
-    if (elements.kachingSound.paused) {
-        elements.audioIcon.src = 'images/audioEmoji.png'; // Change to the pause icon
+    if (isMuted) {
+        // Unmute all sounds
+        elements.audioIcon.src = 'images/audioEmoji.png'; // Change to the unmute icon
         allSounds.forEach(sound => {
-            sound.pause;
-        })
-        
+            sound.muted = false; // Unmute each sound
+        });
     } else {
-        elements.audioIcon.src = 'images/noAudioEmoji.png'; // Change to the play icon
+        // Mute all sounds
+        elements.audioIcon.src = 'images/noAudioEmoji.png'; // Change to the mute icon
         allSounds.forEach(sound => {
-            sound.pause;
-        })
-        
+            sound.muted = true; // Mute each sound
+        });
     }
-
-})
-
+});
 
 // POUTACLICK
 elements.possu.addEventListener("click", () => {
     gameData.hattaraAmount += gameData.hattarasPerClick;
+    gameData.totalHattaraAmount += gameData.totalHattaraAmount;
     displayNumbers();
     spawnHattaras();
     saveProgress();
@@ -221,6 +228,7 @@ elements.fillButton.addEventListener('click', () => {
         displayNumbers();
         saveProgress();
         disablePossu();
+        playYummy();
     }
 });
 
