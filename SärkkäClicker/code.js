@@ -105,7 +105,7 @@ function initializeUI() {
         const buttonElement = document.getElementById(powerUp.element);
         buttonElement.innerHTML = `${powerUp.name} +${powerUp.amount}<br>Cost: ${powerUp.cost} Hattaras`;
 
-        buttonElement.addEventListener('click', () => handlePurchase(index));
+        //buttonElement.addEventListener('click', () => handlePurchase(index));
     });
 }
 
@@ -202,7 +202,7 @@ function incrementHattarasPerSec() {
 }
 
 
-function handlePurchase(index) {
+/*function handlePurchase(index) {
     const powerUp = powerUps[index];
 
     if (gameData.hattaraAmount >= powerUp.cost) {
@@ -225,7 +225,41 @@ function handlePurchase(index) {
         saveProgress();
         playKaching();
     } else {
+        // Show alert and play no money sound only if the player doesn't have enough hattaras
         showText(elements.alertEl);
+        playNoMoneyEffect();
+    }
+}
+*/
+function handlePurchase(index) {
+    const powerUp = powerUps[index];
+    const canAfford = gameData.hattaraAmount >= powerUp.cost;
+
+    if (canAfford) {
+        // Handle successful purchase
+        gameData.hattaraAmount -= powerUp.cost;
+        gameData[powerUp.type] += powerUp.amount;
+        powerUp.cost = Math.ceil(powerUp.cost * 1.1);
+
+        // Update the display for the power-up's new cost
+        const buttonElement = document.getElementById(powerUp.element);
+        buttonElement.innerText = `${powerUp.name} +${powerUp.amount} \n Cost: ${powerUp.cost} Hattaras`;
+
+        // Show feedback and update game data
+        displayNumbers();
+        saveProgress();
+        
+        // Show kaching text and play sound
+        showText(elements.kachingEl);
+        playKaching();
+    }  else if (gameData.hattaraAmount > 0) {
+        // The player has some hattaras, but not enough
+        showText(elements.alertEl);
+        playNoMoneyEffect();
+    } 
+    else {
+        // The player has no hattaras at all
+        showText(elements.alertEl, 1500); // Show alert for longer
         playNoMoneyEffect();
     }
 }
@@ -380,7 +414,7 @@ const powerUps = [
     { element: 'click1', cost: 100, amount: 1, type: 'hattarasPerClick', name: 'Hattaras per click' },
     { element: 'click2', cost: 210, amount: 2, type: 'hattarasPerClick', name: 'Hattaras per click' },
     { element: 'click3', cost: 5500, amount: 50, type: 'hattarasPerClick', name: 'Hattaras per click' },
-    { element: 'click4', cost: 2, amount: 500, type: 'hattarasPerClick', name: 'Hattaras per click' },
+    { element: 'click4', cost: 65000, amount: 500, type: 'hattarasPerClick', name: 'Hattaras per click' },
     { element: 'persec1', cost: 110, amount: 1, type: 'hattarasPerSec', name: 'Hattaras per sec' },
     { element: 'persec2', cost: 230, amount: 2, type: 'hattarasPerSec', name: 'Hattaras per sec' },
     { element: 'persec3', cost: 6000, amount: 50, type: 'hattarasPerSec', name: 'Hattaras per sec' },
@@ -408,7 +442,7 @@ setInterval(incrementHattarasPerSec, 1000);
 setInterval(saveProgress, 2000);
 
 //spawn golden hattara
-setInterval(spawnGoldenHattara,10000);
+setInterval(spawnGoldenHattara,6000);
 
 setInterval(disablePossu, 1);
 
