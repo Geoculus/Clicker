@@ -80,6 +80,7 @@ displayHattaraMultipliers();
 
 // Load Progress
 function loadProgress() {
+    // Load game data
     Object.keys(gameData).forEach(key => {
         const storedValue = localStorage.getItem(key);
         if (storedValue !== null) {
@@ -88,15 +89,38 @@ function loadProgress() {
     });
     elements.meter.style.width = gameData.currentWidth + '%'; // Restore meter progress
     displayNumbers();
+
+    // Load power-ups data
+    const storedPowerUps = localStorage.getItem('powerUps');
+    if (storedPowerUps !== null) {
+        const parsedPowerUps = JSON.parse(storedPowerUps);
+        powerUps.forEach((powerUp, index) => {
+            powerUps[index] = parsedPowerUps[index];
+        });
+    }
 }
 
-window.addEventListener('load', loadProgress);
+function initializeUI() {
+    powerUps.forEach((powerUp, index) => {
+        const buttonElement = document.getElementById(powerUp.element);
+        buttonElement.innerHTML = `${powerUp.name} +${powerUp.amount}<br>Cost: ${powerUp.cost} Hattaras`;
+
+        buttonElement.addEventListener('click', () => handlePurchase(index));
+    });
+}
+
+window.addEventListener('load', function() {
+    loadProgress();  // Load game data first
+    initializeUI();  // Then initialize the UI based on the loaded data
+});
 
 // Save Progress
 function saveProgress() {
     Object.keys(gameData).forEach(key => {
         localStorage.setItem(key, gameData[key]);
     });
+
+    localStorage.setItem('powerUps', JSON.stringify(powerUps));
 }
 
 // Reset Game
@@ -177,24 +201,6 @@ function incrementHattarasPerSec() {
     displayNumbers();
 }
 
-/*
-function handlePurchase(cost, amount, upgradeType) {
-    //if is money
-    if (gameData.hattaraAmount >= cost) {
-        gameData.hattaraAmount -= cost;
-        gameData[upgradeType] += amount;
-        showText(elements.kachingEl);
-        displayNumbers();
-        saveProgress();
-        playKaching();
-
-    } 
-    //if no money
-    else {
-        showText(elements.alertEl);
-        playNoMoneyEffect();
-    }
-}*/
 
 function handlePurchase(index) {
     const powerUp = powerUps[index];
@@ -336,26 +342,51 @@ elements.soundVolumeSlider.addEventListener("input", function() {
 
 /////
 
+function disableAllInteractiveElements() {
+    // Disable all buttons, inputs, links, selects, textareas
+    document.querySelectorAll('button, input, a, select, textarea').forEach(element => {
+        if (element !== elements.resetButton) {
+            element.disabled = true;
+            element.style.pointerEvents = 'none'; // Ensure no clicks can go through
+            element.style.opacity = '0.5'; // Optionally make it look disabled
+        }
+    });
+
+    // Disable all elements with an onclick attribute or event listeners
+    document.querySelectorAll('[onclick], .clickable').forEach(element => {
+        element.style.pointerEvents = 'none';
+        element.style.opacity = '0.5'; // Optionally make it look disabled
+    });
+
+    // Optionally hide or disable other interactive elements (e.g., divs with click events)
+    powerUps.forEach(({ element }) => {
+        const buttonElement = document.getElementById(element);
+        buttonElement.style.pointerEvents = 'none';
+        buttonElement.style.opacity = '0.5'; // Optionally make it look disabled
+    });
+}
+
 // Possu disabler
 function disablePossu() {
     if (gameData.currentWidth >= 100) {
         elements.possu.style.display = "none";
         elements.winTextEl.style.visibility = "visible";
+        disableAllInteractiveElements();
     }
 }
 
 // Power-up purchases
 const powerUps = [
-    { element: 'click+1', cost: 100, amount: 1, type: 'hattarasPerClick', name: 'Hattaras per click' },
-    { element: 'click+2', cost: 210, amount: 2, type: 'hattarasPerClick', name: 'Hattaras per click' },
-    { element: 'click+10', cost: 5500, amount: 50, type: 'hattarasPerClick', name: 'Hattaras per click' },
-    { element: 'click+400', cost: 64000, amount: 500, type: 'hattarasPerClick', name: 'Hattaras per click' },
-    { element: 'persec+1', cost: 110, amount: 1, type: 'hattarasPerSec', name: 'Hattaras per sec' },
-    { element: 'persec+2', cost: 230, amount: 2, type: 'hattarasPerSec', name: 'Hattaras per sec' },
-    { element: 'persec+10', cost: 6000, amount: 50, type: 'hattarasPerSec', name: 'Hattaras per sec' },
-    { element: 'persec+100', cost: 13000, amount: 100, type: 'hattarasPerSec', name: 'Hattaras per sec' },
-    { element: 'persec+300', cost: 70000, amount: 500, type: 'hattarasPerSec', name: 'Hattaras per sec' },
-    { element: 'persec+1000', cost: 150000, amount: 1000, type: 'hattarasPerSec', name: 'Hattaras per sec' },
+    { element: 'click1', cost: 100, amount: 1, type: 'hattarasPerClick', name: 'Hattaras per click' },
+    { element: 'click2', cost: 210, amount: 2, type: 'hattarasPerClick', name: 'Hattaras per click' },
+    { element: 'click3', cost: 5500, amount: 50, type: 'hattarasPerClick', name: 'Hattaras per click' },
+    { element: 'click4', cost: 2, amount: 500, type: 'hattarasPerClick', name: 'Hattaras per click' },
+    { element: 'persec1', cost: 110, amount: 1, type: 'hattarasPerSec', name: 'Hattaras per sec' },
+    { element: 'persec2', cost: 230, amount: 2, type: 'hattarasPerSec', name: 'Hattaras per sec' },
+    { element: 'persec3', cost: 6000, amount: 50, type: 'hattarasPerSec', name: 'Hattaras per sec' },
+    { element: 'persec4', cost: 13000, amount: 100, type: 'hattarasPerSec', name: 'Hattaras per sec' },
+    { element: 'persec5', cost: 70000, amount: 500, type: 'hattarasPerSec', name: 'Hattaras per sec' },
+    { element: 'persec6', cost: 150000, amount: 1000, type: 'hattarasPerSec', name: 'Hattaras per sec' },
 ];
 
 /*
