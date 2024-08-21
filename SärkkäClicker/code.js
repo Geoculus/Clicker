@@ -201,36 +201,6 @@ function incrementHattarasPerSec() {
     displayNumbers();
 }
 
-
-/*function handlePurchase(index) {
-    const powerUp = powerUps[index];
-
-    if (gameData.hattaraAmount >= powerUp.cost) {
-        // Deduct the cost from the player's hattaraAmount
-        gameData.hattaraAmount -= powerUp.cost;
-
-        // Apply the power-up effect
-        gameData[powerUp.type] += powerUp.amount;
-
-        // Increase the cost for the next purchase
-        powerUp.cost = Math.ceil(powerUp.cost * 1.1);
-
-        // Update the display for the power-up's new cost
-        const buttonElement = document.getElementById(powerUp.element);
-        buttonElement.innerText = `${powerUp.name} +${powerUp.amount} \n Cost: ${powerUp.cost} Hattaras`;
-
-        // Show feedback and update game data
-        showText(elements.kachingEl);
-        displayNumbers();
-        saveProgress();
-        playKaching();
-    } else {
-        // Show alert and play no money sound only if the player doesn't have enough hattaras
-        showText(elements.alertEl);
-        playNoMoneyEffect();
-    }
-}
-*/
 function handlePurchase(index) {
     const powerUp = powerUps[index];
     const canAfford = gameData.hattaraAmount >= powerUp.cost;

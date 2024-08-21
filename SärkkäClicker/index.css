@@ -4,6 +4,12 @@ body {
     color: rgb(226, 226, 226);
 }
 
+h2, h3 {
+    margin: 0;      /* Remove the margin around the headings */
+    padding: 0;     /* Remove the padding around the headings */
+    line-height: 0.5; /* Adjust line height if needed */
+}
+
 #mega-div {
     display: flex;
     background-color: #ff9ffa;
@@ -344,7 +350,7 @@ body {
     width: 55%;
 }
 #possu:active {
-    width: 45%;
+    width: 52%;
 }
 
 #big-box1-text {
